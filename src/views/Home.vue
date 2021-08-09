@@ -9,7 +9,7 @@
           <p class="subtitle">
             Fullheight subtitle
           </p>
-          <router-link to="/test" class="button is-outlined is-medium">Outlined</router-link>
+          <router-link to="/test" class="button is-outlined">Test Now!</router-link>
         </div>
       </div>
     </section>
