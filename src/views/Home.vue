@@ -1,18 +1,30 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <section class="hero is-primary is-fullheight-with-navbar">
+      <div class="hero-body">
+        <div class="">
+          <p class="title">
+            Fullheight hero
+          </p>
+          <p class="subtitle">
+            Fullheight subtitle
+          </p>
+          <router-link to="/test" class="button is-outlined is-medium">Outlined</router-link>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
-<script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+<style lang="scss" scoped>
 
+</style>
+
+<script>
 export default {
   name: 'Home',
   components: {
-    HelloWorld
+
   }
 }
 </script>
