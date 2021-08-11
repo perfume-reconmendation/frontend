@@ -77,6 +77,8 @@
 </style>
 
 <script>
+import ApiService from '@/common/api.service.js'
+
 export default {
   name: 'Test',
   components: {
@@ -84,8 +86,17 @@ export default {
   },
   methods: {
     nextQ() {
-      if(this.step == this.questions.length-1) {
-        console.log(1)  
+      if(this.step+1 == this.questions.length) {
+        // class 분류
+        let query = this.questions.map(x => x.input).join(' ')
+        ApiService.post("class", { "query": query })
+          .then(({data}) => {
+            this.$store.state.search = data
+            console.log(data)
+          }).catch((error) => {
+            throw new Error(error);
+          });
+        this.$router.push({path: 'result', query: {query}})
       }
       else {
         this.step += 1
