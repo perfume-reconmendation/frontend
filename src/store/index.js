@@ -4,12 +4,15 @@ import Vuex from "vuex";
 Vue.use(Vuex);
 
 export const store = new Vuex.Store({
-  search: {
-    query: '로드중입니다...',
-    class: '',
+  state: {
+    search: {
+      load: false,
+      query: '로드중입니다...',
+      label: '',
+    },
   },
   getters: {
-    getSearch(){
+    getSearch: () => {
       return this.search
     }
   }

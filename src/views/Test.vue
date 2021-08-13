@@ -91,14 +91,12 @@ export default {
         let query = this.questions.map(x => x.input).join(' ')
         ApiService.post("class", { "query": query })
           .then(({data}) => {
-            this.$store.state.search = data
-            console.log(data)
-          // ApiService.post("class", { "query": query })
-          //   .then(({data}) => {
-          //     this.$store.state.search = data
-          //   })
-
-
+            console.log(query, data)
+            this.$store.state.search = {
+              "query" : query,
+              "label" : data,
+              "load" : true
+            }
           }).catch((error) => {
             throw new Error(error);
           });
