@@ -93,6 +93,12 @@ export default {
           .then(({data}) => {
             this.$store.state.search = data
             console.log(data)
+          // ApiService.post("class", { "query": query })
+          //   .then(({data}) => {
+          //     this.$store.state.search = data
+          //   })
+
+
           }).catch((error) => {
             throw new Error(error);
           });

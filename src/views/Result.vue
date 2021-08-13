@@ -118,14 +118,10 @@ export default {
     }
   },
   computed: {
-    getSearch() {
-      return this.$store.state.search
-    },
+    
   },
   watch: {
-    getSearch(v) {
-      console.log(v)
-    }
+    
   },
 }
 </script>
