@@ -1,19 +1,30 @@
 <template>
   <div class="result">
-    <section class="hero is-fullheight-with-navbar">
+    <section class="hero is-danger is-fullheight-with-navbar">
       <div class="hero-body" id="container">
         <div class="box">
-          <input class="input is-primary" type="text" readonly :value="$store.state.search.query">
-          <article v-if="$store.state.search.label != ''" class="message" style="margin: 10px 0px;">
+          <input class="input is-primary" type="text" readonly :value="query">
+          <article v-if="load" class="message" style="margin: 10px 0px;">
             <div class="message-body">
-              <strong>{{labelData[$store.state.search.label].name}}</strong><br>
-              {{labelData[$store.state.search.label].text}}
+              <strong>{{labelData[label].name}}</strong><br>
+              {{labelData[label].text}}
             </div>
           </article>
           <div class="tabs">
             <ul>
               <li v-for="(item, i) in alg" :key="i" :class="selected == item ? 'is-active': ''" @click="select(item)"><a>{{item}}</a></li>
             </ul>
+          </div>
+          <div v-if="recommend[selected].load == false">
+            <div class="box">
+              <p class="subtitle" style="color: #000">로딩중...</p>
+            </div>
+            <div class="box">
+              <p class="subtitle" style="color: #000">로딩중...</p>
+            </div>
+            <div class="box">
+              <p class="subtitle" style="color: #000">로딩중...</p>
+            </div>
           </div>
           <div v-for="(item, j) in recommend[selected]['reviews']" :key="j">
             <div class="box">
@@ -75,6 +86,8 @@ export default {
   },
   data() {
     return {
+      query: '',
+      label: '',
       labelData: [
         {name: '라벨이름1', text: '해당 텍스트는 꽃과 달콤함등으로 구성된 라벨로 분류되었습니다.'},
         {name: '라벨이름2', text: '해당 텍스트는 꽃과 달콤함등으로 구성된 라벨로 분류되었습니다.'},
@@ -85,6 +98,7 @@ export default {
       alg: ['Word2Vec', 'Doc2Vec', 'Bert'],
       recommend: {
         'Word2Vec': {
+          load: false,
           reviews: [
             // { // ex
             //   text: '향기나는 리뷰 세르주루텐 상탈 마제스퀼 Serge Lutens Santal Majuscule Eau De Parfum 진입 장벽이 높다고 알려진, 예술가 감성의 세르주루텐 향수. 하지만 요즘엔 소비자 분들이 굉장히 용감해지기도 하셨고, 후각의 스펙트럼도 넓어지신 것 같아서 이제는 더 이상 예전만큼 향기 자체가 막 어렵다고 느끼실 것 같진 않다', 
@@ -99,9 +113,11 @@ export default {
           ]
         },
         'Doc2Vec': {
+          load: false,
           reviews: []
         },
         'Bert': {
+          load: false,
           reviews: []
         }
       }
@@ -164,6 +180,8 @@ export default {
       if(v) {
         let query = this.$store.state.search.query
         let label = this.$store.state.search.label
+        this.query = query,
+        this.label = label
 
         ApiService.post("similar/bert", { "query": query, "label": label }).then(({data}) => {
           console.log(data)
@@ -179,6 +197,7 @@ export default {
               ]
             }
           })
+          this.recommend['Bert'].load = true
         }).catch((error) => {
           console.log(error)
         })
@@ -196,6 +215,7 @@ export default {
               ]
             }
           })
+          this.recommend['Word2Vec'].load = true
         }).catch((error) => {
           console.log(error)
         })
@@ -213,6 +233,7 @@ export default {
               ]
             }
           })
+          this.recommend['Doc2Vec'].load = true
         }).catch((error) => {
           console.log(error)
         })

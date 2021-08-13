@@ -1,17 +1,17 @@
 <template>
   <div class="test">
-    <section class="hero is-fullheight-with-navbar">
+    <section class="hero is-danger is-fullheight-with-navbar">
       <div class="hero-body" id="container">
         <div class="box">
-          <figure class="image is-480x480">
-            <img src="https://bulma.io/images/placeholders/480x480.png">
+          <figure class="box image is-480x480">
+            <img :src="questions[step].img">
           </figure> 
           <div class="q">Q{{step+1}} : {{questions[step].text}}</div>
-          <div class="search">
-            <textarea class="textarea" v-model="questions[step].input" style="width: 350px" placeholder="10 lines of textarea"></textarea>
+          <div class="search box">
+            <textarea class="textarea is-info" v-model="questions[step].input" style="width: 350px; resize:none" placeholder="input your answer"></textarea>
             <div>
-              <button class="button is-outlined" v-on:click="clearText">Clear</button>
-              <button class="button is-outlined" v-on:click="nextQ">Next</button>
+              <button class="button is-info is-outlined" v-on:click="clearText">Clear</button>
+              <button class="button is-success" v-on:click="nextQ">Next</button>
             </div>
           </div>
         </div>
@@ -31,7 +31,6 @@
     height: 800px;
     padding: 20px;
     box-sizing: border-box;
-    background-color: #DDD;
     position: relative;
   }
   #container > .box > .image {
@@ -40,16 +39,16 @@
     top: 0;
     width: 600px;
     height: 600px;
-    background-color: #AAA;
     padding: 20px;
   }
   #container > .box > .q {
     position: absolute;
     left: 100px;
-    bottom: 350px;
+    bottom: 300px;
     width: 400px;
     height: 80px;
-    background-color: rgba(0,0,0,0.8);
+    background-color: rgba(0,0,0,0.9);
+    font-weight: bold;
     text-align: center;
     color: #FFF;
     line-height: 80px;
@@ -61,7 +60,6 @@
     right: 0;
     width: 400px;
     height: 400px;
-    background-color: #AAA;
     padding: 20px;
   }
   #container > .box > .search > textarea {
@@ -114,8 +112,8 @@ export default {
     return {
       step: 0,
       questions: [
-        {text: '1asdfadsf', img: '', input: ''},
-        {text: '2adsfasdfaa', img: '', input: ''},
+        {text: '향을 비유적으로 묘사해주세요', img: 'https://i.pinimg.com/474x/a7/75/22/a7752282444951cbc7a9179a8913d640.jpg', input: ''},
+        {text: '향을 느낌적으로 묘사해주세요', img: 'https://i.pinimg.com/474x/e8/ec/e9/e8ece980322ce35dd4c450bb31814fa1.jpg', input: ''},
       ]
     }
   }

@@ -2,17 +2,18 @@
   <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
       <a class="navbar-item" href="https://bulma.io">
-        <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
+        <img src="https://avatars.githubusercontent.com/u/84188739?s=200&v=4" width="28" height="28">
+        <router-link to="/" style="font-size: 18px; font-weight: bold">Perfume Recommendation</router-link>
       </a>
     </div>
 
     <div id="navbarBasicExample" class="navbar-menu">
       <div class="navbar-start">
-        <a class="navbar-item">
+        <router-link to="/" class="navbar-item">
           Home
-        </a>
+        </router-link>
 
-        <a class="navbar-item">
+        <a href="https://github.com/perfume-reconmendation/perfume-recommendation" class="navbar-item">
           Documentation
         </a>
 
@@ -25,16 +26,6 @@
             <a class="navbar-item">
               About
             </a>
-            <a class="navbar-item">
-              Jobs
-            </a>
-            <a class="navbar-item">
-              Contact
-            </a>
-            <hr class="navbar-divider">
-            <a class="navbar-item">
-              Report an issue
-            </a>
           </div>
         </div>
       </div>
@@ -42,11 +33,8 @@
       <div class="navbar-end">
         <div class="navbar-item">
           <div class="buttons">
-            <a class="button is-primary">
-              <strong>Sign up</strong>
-            </a>
-            <a class="button is-light">
-              Log in
+            <a href="https://github.com/perfume-reconmendation" class="button is-dark">
+              <strong>Github</strong>
             </a>
           </div>
         </div>
