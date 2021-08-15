@@ -89,10 +89,10 @@ export default {
       query: '',
       label: '',
       labelData: [
-        {name: '라벨이름1', text: '해당 텍스트는 꽃과 달콤함등으로 구성된 라벨로 분류되었습니다.'},
-        {name: '라벨이름2', text: '해당 텍스트는 꽃과 달콤함등으로 구성된 라벨로 분류되었습니다.'},
-        {name: '라벨이름3', text: '해당 텍스트는 꽃과 달콤함등으로 구성된 라벨로 분류되었습니다.'},
-        {name: '라벨이름4', text: '해당 텍스트는 꽃과 달콤함등으로 구성된 라벨로 분류되었습니다.'},
+        {name: 'Aquatic', text: '해당 텍스트는 물, 신선함, 시큼함, 여름, 청명한, 파란 느낌의 라벨로 분류되었습니다.'},
+        {name: 'Tobacco', text: '해당 텍스트는 담배향기, 바닐라, 나무, 강함, 따뜻한 느낌의 라벨로 분류되었습니다.'},
+        {name: 'Floral', text: '해당 텍스트는 달콤함, 바닐라, 패출리, 천사, 꽃, 섹시함, 자스민 느낌의 라벨로 분류되었습니다.'},
+        {name: 'Fruity', text: '해당 텍스트는 성공, 장미, 배치, 과일, 왕자, 파인애플 느낌의 라벨로 분류되었습니다.'},
       ],
       selected: 'Bert',
       alg: ['Word2Vec', 'Doc2Vec', 'Bert'],
@@ -130,12 +130,19 @@ export default {
     highlight(text, hdata) {
       let w = text.split(' ').map((x)=> {
         let t = x
-        for(let i=0;i<hdata.length;i++) {
-          let bg = hdata[i][1]
-          let color = '#FFF'
-          t = t.replace(hdata[i][0], `<span style="background-color:${bg}; color:${color}; border-radius: 4px; padding: 2px">${hdata[i][0]}</span>`)
+        for (var key in hdata) {
+          let bg = hdata[key]
+          let color = '#333'
+          let re = new RegExp(key, 'gi');
+          t = t.replace(re, `<span style="background-color:${bg}; color:${color}; border-radius: 4px; padding: 2px">${key}</span>`)
         }
         return t
+        // for(let i=0;i<hdata.length;i++) {
+        //   let bg = hdata[i][1]
+        //   let color = '#FFF'
+        //   t = t.replace(hdata[i][0], `<span style="background-color:${bg}; color:${color}; border-radius: 4px; padding: 2px">${hdata[i][0]}</span>`)
+        // }
+        // return t
       })
       return w.join(' ')
     },
@@ -192,10 +199,20 @@ export default {
               "accords": x.accords,
               "similarity": x.similarity,
               "img": 'https://bulma.io/images/placeholders/128x128.png',
-              "highlight": [
-                ['리뷰', '#333333'],
-              ]
+              "highlight": {
+                // '리뷰':'#333333',
+              }
             }
+          })
+          ApiService.post("highlight", {
+            query: query,
+            top3: data
+          }).then((hdata) => {
+            console.log(hdata.data)
+
+            this.recommend['Bert'].reviews[0]["highlight"] = hdata.data[1]["highlight"]
+            this.recommend['Bert'].reviews[1]["highlight"] = hdata.data[2]["highlight"]
+            this.recommend['Bert'].reviews[2]["highlight"] = hdata.data[3]["highlight"]
           })
           this.recommend['Bert'].load = true
         }).catch((error) => {
@@ -210,10 +227,20 @@ export default {
               "accords": x.accords,
               "similarity": x.similarity,
               "img": 'https://bulma.io/images/placeholders/128x128.png',
-              "highlight": [
-                ['리뷰', '#333333'],
-              ]
+              "highlight": {
+                // '리뷰':'#333333',
+              }
             }
+          })
+          ApiService.post("highlight", {
+            query: query,
+            top3: data
+          }).then((hdata) => {
+            console.log(hdata.data)
+
+            this.recommend['Word2Vec'].reviews[0]["highlight"] = hdata.data[1]["highlight"]
+            this.recommend['Word2Vec'].reviews[1]["highlight"] = hdata.data[2]["highlight"]
+            this.recommend['Word2Vec'].reviews[2]["highlight"] = hdata.data[3]["highlight"]
           })
           this.recommend['Word2Vec'].load = true
         }).catch((error) => {
@@ -228,10 +255,20 @@ export default {
               "accords": x.accords,
               "similarity": x.similarity,
               "img": 'https://bulma.io/images/placeholders/128x128.png',
-              "highlight": [
-                ['리뷰', '#333333'],
-              ]
+              "highlight": {
+                // '리뷰':'#333333',
+              }
             }
+          })
+          ApiService.post("highlight", {
+            query: query,
+            top3: data
+          }).then((hdata) => {
+            console.log(hdata.data)
+
+            this.recommend['Doc2Vec'].reviews[0]["highlight"] = hdata.data[1]["highlight"]
+            this.recommend['Doc2Vec'].reviews[1]["highlight"] = hdata.data[2]["highlight"]
+            this.recommend['Doc2Vec'].reviews[2]["highlight"] = hdata.data[3]["highlight"]
           })
           this.recommend['Doc2Vec'].load = true
         }).catch((error) => {
