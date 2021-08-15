@@ -3,7 +3,9 @@
     <section class="hero is-danger is-fullheight-with-navbar">
       <div class="hero-body" id="container">
         <div class="box">
-          <input class="input is-primary" type="text" readonly :value="query">
+          <div class="input is-primary">
+            <p v-html="highlight(query, queryHighlight[selected])"></p>
+          </div>
           <article v-if="load" class="message" style="margin: 10px 0px;">
             <div class="message-body">
               <strong>{{labelData[label].name}}</strong><br>
@@ -96,6 +98,11 @@ export default {
       ],
       selected: 'Bert',
       alg: ['Word2Vec', 'Doc2Vec', 'Bert'],
+      queryHighlight: {
+        'Word2Vec': {},
+        'Doc2Vec': {},
+        'Bert': {}
+      },
       recommend: {
         'Word2Vec': {
           load: false,
@@ -210,6 +217,7 @@ export default {
           }).then((hdata) => {
             console.log(hdata.data)
 
+            this.queryHighlight['Bert'] = hdata.data[0]["highlight"]
             this.recommend['Bert'].reviews[0]["highlight"] = hdata.data[1]["highlight"]
             this.recommend['Bert'].reviews[1]["highlight"] = hdata.data[2]["highlight"]
             this.recommend['Bert'].reviews[2]["highlight"] = hdata.data[3]["highlight"]
@@ -237,7 +245,8 @@ export default {
             top3: data
           }).then((hdata) => {
             console.log(hdata.data)
-
+            
+            this.queryHighlight['Word2Vec'] = hdata.data[0]["highlight"]
             this.recommend['Word2Vec'].reviews[0]["highlight"] = hdata.data[1]["highlight"]
             this.recommend['Word2Vec'].reviews[1]["highlight"] = hdata.data[2]["highlight"]
             this.recommend['Word2Vec'].reviews[2]["highlight"] = hdata.data[3]["highlight"]
@@ -266,6 +275,7 @@ export default {
           }).then((hdata) => {
             console.log(hdata.data)
 
+            this.queryHighlight['Doc2Vec'] = hdata.data[0]["highlight"]
             this.recommend['Doc2Vec'].reviews[0]["highlight"] = hdata.data[1]["highlight"]
             this.recommend['Doc2Vec'].reviews[1]["highlight"] = hdata.data[2]["highlight"]
             this.recommend['Doc2Vec'].reviews[2]["highlight"] = hdata.data[3]["highlight"]
