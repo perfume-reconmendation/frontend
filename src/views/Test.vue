@@ -112,8 +112,7 @@ export default {
     return {
       step: 0,
       questions: [
-        {text: '향을 비유적으로 묘사해주세요', img: 'https://i.pinimg.com/474x/a7/75/22/a7752282444951cbc7a9179a8913d640.jpg', input: ''},
-        {text: '향을 느낌적으로 묘사해주세요', img: 'https://i.pinimg.com/474x/e8/ec/e9/e8ece980322ce35dd4c450bb31814fa1.jpg', input: ''},
+        {text: '향을 비유적으로 묘사해주세요\n', img: 'https://i.pinimg.com/474x/a7/75/22/a7752282444951cbc7a9179a8913d640.jpg', input: ''},
       ]
     }
   }
