@@ -77,6 +77,14 @@
 
 <script>
 import ApiService from '@/common/api.service.js'
+import imagesMap from '../assets/imgPath';
+
+function imageNameToPath(name) {
+  const path =  imagesMap.find(item => {
+    return item.name === name;
+  }).path;
+  return `https://firebasestorage.googleapis.com/v0/b/sai-perfume-recommendation.appspot.com/o/perfumes%2F${path}?alt=media`;
+}
 
 export default {
   name: 'Result',
@@ -92,9 +100,9 @@ export default {
       label: '',
       labelData: [
         {name: 'Aquatic', text: '해당 텍스트는 물, 신선함, 시큼함, 여름, 청명한, 파란 느낌의 라벨로 분류되었습니다.'},
-        {name: 'Tobacco', text: '해당 텍스트는 담배향기, 바닐라, 나무, 강함, 따뜻한 느낌의 라벨로 분류되었습니다.'},
-        {name: 'Floral', text: '해당 텍스트는 달콤함, 바닐라, 패출리, 천사, 꽃, 섹시함, 자스민 느낌의 라벨로 분류되었습니다.'},
-        {name: 'Fruity', text: '해당 텍스트는 성공, 장미, 배치, 과일, 왕자, 파인애플 느낌의 라벨로 분류되었습니다.'},
+        {name: 'Woody', text: '해당 텍스트는 바닐라, 나무, 강함, 따뜻한, 가죽 느낌의 라벨로 분류되었습니다.'},
+        {name: 'Floral', text: '해당 텍스트는 달콤함, 바닐라, 패출리, 천사, 꽃, 자스민 느낌의 라벨로 분류되었습니다.'},
+        {name: 'Fruity', text: '해당 텍스트는 성공, 장미, 배치, 과일, 파인애플 느낌의 라벨로 분류되었습니다.'},
       ],
       selected: 'Bert',
       alg: ['Word2Vec', 'Doc2Vec', 'Bert'],
@@ -205,7 +213,7 @@ export default {
               "perfume": x.name,
               "accords": x.accords,
               "similarity": x.similarity,
-              "img": 'https://bulma.io/images/placeholders/128x128.png',
+              "img": imageNameToPath(x.name),
               "highlight": {
                 // '리뷰':'#333333',
               }
@@ -234,7 +242,7 @@ export default {
               "perfume": x.name,
               "accords": x.accords,
               "similarity": x.similarity,
-              "img": 'https://bulma.io/images/placeholders/128x128.png',
+              "img": imageNameToPath(x.name),
               "highlight": {
                 // '리뷰':'#333333',
               }
@@ -263,7 +271,7 @@ export default {
               "perfume": x.name,
               "accords": x.accords,
               "similarity": x.similarity,
-              "img": 'https://bulma.io/images/placeholders/128x128.png',
+              "img": imageNameToPath(x.name),
               "highlight": {
                 // '리뷰':'#333333',
               }
@@ -284,67 +292,6 @@ export default {
         }).catch((error) => {
           console.log(error)
         })
-        
-
-        // let w2v = await ApiService.post("similar/word2vec", { "query": query, "label": label })
-        // this.recommend['Word2Vec'] = w2v.data.map(x=> {
-        //   return {
-        //     "text": x.review,
-        //     "perfume": x.name,
-        //     "accords": x.accords,
-        //     "img": 'https://bulma.io/images/placeholders/128x128.png',
-        //     "highlight": [
-        //       ['리뷰', '#333333'],
-        //     ]
-        //   }
-        // })
-        // let d2v = await ApiService.post("similar/doc2vec", { "query": query, "label": label })
-        // this.recommend['Doc2Vec'] = d2v.data.map(x=> {
-        //   return {
-        //     "text": x.review,
-        //     "perfume": x.name,
-        //     "accords": x.accords,
-        //     "img": 'https://bulma.io/images/placeholders/128x128.png',
-        //     "highlight": [
-        //       ['리뷰', '#333333'],
-        //     ]
-        //   }
-        // })
-        
-        // console.log(data)
-        // let w2v = await ApiService.post("similar/word2vec", { "query": query, "label": label })
-        // console.log(w2v.data)
-        // let d2v = await ApiService.post("similar/doc2vec", { "query": query, "label": label })
-        // console.log(d2v.data)
-        
-        // [bert.data, d2v.data].foreach(x => {
-        //   {
-        //     "text": x.review,
-        //     "perfume": x.name,
-        //     "accords": x.accords,
-        //     "img": 'https://bulma.io/images/placeholders/128x128.png',
-        //     "highlight": [
-        //       ['리뷰', '#333333'],
-        //     ]
-        //   }
-        // });
-        // console.log(data)
-
-        // this.recommend.push({
-        //   reviews: [
-        //     {
-        //       text: '향기나는 리뷰 세르주루텐 상탈 마제스퀼 Serge Lutens Santal Majuscule Eau De Parfum 진입 장벽이 높다고 알려진, 예술가 감성의 세르주루텐 향수. 하지만 요즘엔 소비자 분들이 굉장히 용감해지기도 하셨고, 후각의 스펙트럼도 넓어지신 것 같아서 이제는 더 이상 예전만큼 향기 자체가 막 어렵다고 느끼실 것 같진 않다', 
-        //       perfume: ,
-        //       accords: ['a', 'b', 'c'],
-        //       img: 'https://bulma.io/images/placeholders/128x128.png',
-        //       highlight: [
-        //         ['리뷰', '#333333'],
-        //       ]
-        //     },
-        //     {},
-        //     {}
-        //   ]
-        // })
       }
     }
   },

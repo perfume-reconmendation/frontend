@@ -52,7 +52,7 @@
     text-align: center;
     color: #FFF;
     line-height: 80px;
-    font-size: 24px;
+    font-size: 14px;
   }
   #container > .box > .search { 
     position: absolute;
@@ -112,8 +112,7 @@ export default {
     return {
       step: 0,
       questions: [
-        {text: '향을 비유적으로 묘사해주세요', img: 'https://i.pinimg.com/474x/a7/75/22/a7752282444951cbc7a9179a8913d640.jpg', input: ''},
-        {text: '향을 느낌적으로 묘사해주세요', img: 'https://i.pinimg.com/474x/e8/ec/e9/e8ece980322ce35dd4c450bb31814fa1.jpg', input: ''},
+        {text: 'Please elaborate on the feeling that you are seeking', img: 'https://firebasestorage.googleapis.com/v0/b/sai-perfume-recommendation.appspot.com/o/215.jpg?alt=media&token=c7751517-6ab0-42c5-99bf-999fc47a3f0c', input: 'test'}
       ]
     }
   }
