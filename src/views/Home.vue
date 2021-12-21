@@ -7,9 +7,9 @@
             The Pefumers
           </p>
           <p class="subtitle">
-            Find Your Soulmate Perfume
+            We will find a perfume that will be your soul mate.
           </p>
-          <router-link to="/test" class="button is-outlined">Find out my Perfume</router-link>
+          <router-link to="/test" class="button is-outlined">Let's Findout!</router-link>
         </div>
       </div>
     </section>
