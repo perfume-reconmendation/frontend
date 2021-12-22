@@ -4,7 +4,7 @@
       <div class="hero-body">
         <div class="">
           <p class="title">
-            The Pefumers
+            The Perfumers
           </p>
           <p class="subtitle">
             We will find a perfume that will be your soul mate.
