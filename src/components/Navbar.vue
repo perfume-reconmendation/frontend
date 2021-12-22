@@ -3,7 +3,7 @@
     <div class="navbar-brand">
       <a class="navbar-item" href="https://bulma.io">
         <img src="https://avatars.githubusercontent.com/u/84188739?s=200&v=4" width="28" height="28">
-        <router-link to="/" style="font-size: 18px; font-weight: bold">Perfume Recommendation</router-link>
+        <router-link to="/" style="font-size: 18px; font-weight: bold">The Perfumers</router-link>
       </a>
     </div>
 
